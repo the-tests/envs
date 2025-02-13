@@ -49,7 +49,7 @@ jobs:
           printf '```\n' >> $GITHUB_STEP_SUMMARY
           printf '# Stored envs and secrets\n' >> $GITHUB_STEP_SUMMARY
           printf '%s Secrets:\n    ```%s\n' '-' '${{ secrets }}' >> $GITHUB_STEP_SUMMARY
-          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
           printf '\n' >> $GITHUB_STEP_SUMMARY
           printf '%s Envs:\n    ```%s\n' '-' '${{ vars }}' >> $GITHUB_STEP_SUMMARY
-          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
