@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  ENVS: ${{ envs }}
   SECRETS: ${{ secrets }}
   VARS: ${{ vars }}
 
@@ -17,8 +16,6 @@ jobs:
         shell: bash
         run: |
           printf '# Stored envs and secrets\n' >> $GITHUB_STEP_SUMMARY
-          printf '%s Secrets:\n    ```%s\n' '-' '${{ env.ENVS }}' >> $GITHUB_STEP_SUMMARY
-          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
           printf '\n' >> $GITHUB_STEP_SUMMARY
           printf '%s Envs:\n    ```%s\n' '-' '${{ env.SECRETS }}' >> $GITHUB_STEP_SUMMARY
           printf '    ```\n' >> $GITHUB_STEP_SUMMARY
