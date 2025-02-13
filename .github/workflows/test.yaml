@@ -28,6 +28,26 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     steps:
+      - name: Is actor allowed
+        shell: python
+        run: |
+          import json
+          from os import environ
+          from sys import exit
+
+          actor = '${{ github.actor }}'
+          var_key = 'ALLOWED_ACTORS'
+
+          allowed_actors = json.loads(environ.get(var_key, '[]'))
+          if actor not in allowed_actors:
+            summary_path = environ['GITHUB_STEP_SUMMARY']
+            with open(summary_path, 'a') as f:
+              f.write(
+                f'# Actor `{actor}` is not allowed to run workflow. '
+                f'Check `{var_key}` variable in `Environments` settings\n'
+              )
+              exit(1)
+
       - name: Checkout
         uses: actions/checkout@v4
 
