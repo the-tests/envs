@@ -1,4 +1,4 @@
-name: 'Release: My Product ${{ github.event.inputs.version }}'
+name: 'Release: My Product'
 description: 'Release new version of my product at specific environment'
 
 on:
