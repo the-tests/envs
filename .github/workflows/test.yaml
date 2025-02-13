@@ -42,3 +42,10 @@ jobs:
           printf '# Release\n' >> $GITHUB_STEP_SUMMARY
           printf '%s Applied to env: `%s`\n' '-' '${{ github.event.inputs.environment }}' >> $GITHUB_STEP_SUMMARY
           printf '%s Version: `%s`\n' '-' '${{ github.event.inputs.version }}' >> $GITHUB_STEP_SUMMARY
+          printf '# GitHub\n' >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s\n' $(echo '${{ toJson(github) }}' | jq) >> $GITHUB_STEP_SUMMARY
+          printf '```\n' >> $GITHUB_STEP_SUMMARY
+          printf '# Stored envs and secrets\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Secret: `%s`\n' '-' '${{ secrets.SECRET_KEY }}' >> $GITHUB_STEP_SUMMARY
+          printf '%s Env: `%s`\n' '-' '${{ env.ENV_KEY }}' >> $GITHUB_STEP_SUMMARY
