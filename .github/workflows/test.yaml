@@ -46,7 +46,8 @@ jobs:
                 f'# Actor `{actor}` is not allowed to run workflow. '
                 f'Check `{var_key}` variable in `Environments` settings\n'
               )
-              exit(1)
+              f.write('But we will continue since it is just a test repo\n\n')
+              exit(0)
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -70,4 +71,6 @@ jobs:
           printf '    ```\n' >> $GITHUB_STEP_SUMMARY
           printf '\n' >> $GITHUB_STEP_SUMMARY
           printf '%s Envs:\n    ```%s\n' '-' '${{ vars }}' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Envs 2:\n    ```%s\n' '-' '${{ env }}' >> $GITHUB_STEP_SUMMARY
           printf '    ```\n' >> $GITHUB_STEP_SUMMARY
