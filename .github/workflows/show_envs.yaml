@@ -1,0 +1,26 @@
+name: 'Show envs'
+
+on:
+  workflow_dispatch:
+
+env:
+  ENVS: ${{ env }}
+  SECRETS: ${{ secrets }}
+  VARS: ${{ vars }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Print envs
+        shell: bash
+        run: |
+          printf '# Stored envs and secrets\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Secrets:\n    ```%s\n' '-' '${{ env.ENVS }}' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
+          printf '\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Envs:\n    ```%s\n' '-' '${{ env.SECRETS }}' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Vars:\n    ```%s\n' '-' '${{ env.VARS }}' >> $GITHUB_STEP_SUMMARY
+          printf '    ```\n' >> $GITHUB_STEP_SUMMARY
