@@ -22,6 +22,7 @@ on:
 env:
   PRODUCT_VERSION: ${{ github.event.inputs.version }}
   PRODUCT_ENV: ${{ github.event.inputs.environment }}
+  ALLOWED_ACTORS: ${{ vars.ALLOWED_ACTORS }}
 
 jobs:
   release:
