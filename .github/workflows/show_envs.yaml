@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  ENVS: ${{ env }}
+  ENVS: ${{ envs }}
   SECRETS: ${{ secrets }}
   VARS: ${{ vars }}
 
