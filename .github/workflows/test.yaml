@@ -39,6 +39,6 @@ jobs:
       - name: Generate summary
         shell: bash
         run: |
-          printf '# Release\n'
-          printf '%s Applied to env: `%s`:\n' '-' '${{ github.event.inputs.environment }}' >> $GITHUB_STEP_SUMMARY
+          printf '# Release\n' >> $GITHUB_STEP_SUMMARY
+          printf '%s Applied to env: `%s`\n' '-' '${{ github.event.inputs.environment }}' >> $GITHUB_STEP_SUMMARY
           printf '%s Version: `%s`\n' '-' '${{ github.event.inputs.version }}' >> $GITHUB_STEP_SUMMARY
