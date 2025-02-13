@@ -1,0 +1,44 @@
+name: 'Release: My Product'
+description: 'Release new version of my product at specific environment'
+
+on:
+  workflow_dispatch:
+    inputs:
+      # usage: ${{ github.event.inputs.environment }}
+      environment:
+        description: 'Environment to enroll new version: production or staging'
+        options:
+          - staging
+          - production
+        required: true
+        default: staging
+        type: choice
+      version:
+        description: 'Version of released my product'
+        required: true
+        type: string
+
+env:
+  PRODUCT_VERSION: ${{ github.event.inputs.version }}
+  PRODUCT_ENV: ${{ github.event.inputs.environment }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run release
+        shell: bash
+        run: set -e && ./run_release.sh
+
+      - name: Generate summary
+        shell: bash
+        run: |
+          printf '# Release\n'
+          printf '%s Applied to env: `%s`:\n' '-' '${{ github.event.inputs.environment }}' >> $GITHUB_STEP_SUMMARY
+          printf '%s Version: `%s`\n' '-' '${{ github.event.inputs.version }}' >> $GITHUB_STEP_SUMMARY
