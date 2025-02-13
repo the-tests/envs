@@ -17,7 +17,7 @@ on:
         description: 'Version of released my product'
         required: true
         type: string
-        default x.0
+        default: x.0
 
 env:
   PRODUCT_VERSION: ${{ github.event.inputs.version }}
